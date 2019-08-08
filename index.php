@@ -4,6 +4,7 @@ require_once("vendor/autoload.php");
 require_once("functions.php");
 
 use Hcode\Model\User;
+use Hcode\Page;
 use Hcode\PageAdmin;
 use Hcode\DB\Sql;
 use Raim\raim\Tpl;
@@ -15,7 +16,7 @@ $app->config('debug', true);
 
 $app->get('/', function() {
     
-	$page = new Hcode\Page();
+	$page = new Page();
 
 	$page->setTpl("index");
 
@@ -232,6 +233,16 @@ $app->post("/admin/categories/:idcategory", function($idcategory){
 
 	header("Location: /admin/categories");
 	exit;
+});
+
+$app->get("/categories/:idcategory", function($idcategory){
+	$category = new Category();
+	$category->get((int)$idcategory);
+	$page = new Page();
+	$page->setTpl("category", [
+		"category"=>$category->getValues(),
+		"products"=>[]
+	]);
 });
 
 
