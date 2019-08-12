@@ -4,7 +4,7 @@ use \Hcode\PageAdmin;
 use \Hcode\Model\User;
 use \Hcode\Model\Products;
 
-$app->get("/admin/products/", function(){
+$app->get("/admin/products", function(){
 	User::verifyLogin();
 	$products = Products::ListAll();
 	$page = new PageAdmin();
