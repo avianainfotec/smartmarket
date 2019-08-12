@@ -3,9 +3,13 @@ session_start();
 require_once("vendor/autoload.php");
 require_once("functions.php");
 
-use Hcode\Model\User;
-use Hcode\Page;
-use Hcode\PageAdmin;
+
+
+
+
+
+//use Hcode\Model\User;
+//use Hcode\PageAdmin;
 use Hcode\DB\Sql;
 use Raim\raim\Tpl;
 use Hcode\Model\Category;
@@ -14,14 +18,25 @@ $app = new \Slim\Slim();
 
 $app->config('debug', true);
 
+require_once("site.php");
+require_once("admin.php");
+require_once("admin-users.php");
+require_once("admin-forgot.php");
+require_once("admin-categories.php");
+require_once("admin-products.php");
+
+
+/* rota da home do site
 $app->get('/', function() {
     
-	$page = new Page();
+	$page = new Hcode\Page();
 
 	$page->setTpl("index");
 
 });
+*/
 
+/* Rota da home admin
 $app->get('/admin', function() {
     
 	User::verifyLogin();
@@ -60,7 +75,9 @@ $app->get('/admin/logout', function() {
 	exit;
 
 });
+*/
 
+/* Rotas de Usuarios
 $app->get("/admin/users", function(){
 	User::verifyLogin();
 	$users = User::listAll();
@@ -131,7 +148,9 @@ $app->post("/admin/users/:iduser", function($iduser){
 	exit;	
 
 });
+*/
 
+/* Rotas para Forgot 
 $app->get("/admin/forgot", function(){
 	$page = new PageAdmin([
 		"header"=>false,
@@ -183,7 +202,9 @@ $app->post("/admin/forgot/reset", function(){
 	$page->setTpl("forgot-reset-success");
 
 });
+*/
 
+/* Rotas para as categorias
 $app->get("/admin/categories", function(){
 	$categories = Category::listAll();
 	User::verifyLogin();
@@ -234,16 +255,8 @@ $app->post("/admin/categories/:idcategory", function($idcategory){
 	header("Location: /admin/categories");
 	exit;
 });
+*/
 
-$app->get("/categories/:idcategory", function($idcategory){
-	$category = new Category();
-	$category->get((int)$idcategory);
-	$page = new Page();
-	$page->setTpl("category", [
-		"category"=>$category->getValues(),
-		"products"=>[]
-	]);
-});
 
 
 $app->run();
