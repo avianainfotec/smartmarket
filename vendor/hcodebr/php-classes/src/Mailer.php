@@ -6,8 +6,8 @@ use Rain\Tpl;
 
 class Mailer {
 	
-	const USERNAME = "avianainfotecaju@gmail.com";
-	const PASSWORD = "<?SKATE@1983?>";
+	const USERNAME = "MEU EMAIL ESTAVA AQUI";
+	const PASSWORD = "<?MINHA SENHA AQUI?>";
 	const NAME_FROM = "Aviana SmartMarket";
 
 	private $mail;
