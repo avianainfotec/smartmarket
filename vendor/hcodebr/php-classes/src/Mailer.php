@@ -6,9 +6,9 @@ use Rain\Tpl;
 
 class Mailer {
 	
-	const USERNAME = "MEU EMAIL ESTAVA AQUI";
-	const PASSWORD = "<?MINHA SENHA AQUI?>";
-	const NAME_FROM = "Aviana SmartMarket";
+	const USERNAME = "cursophp7hcode@gmail.com";
+	const PASSWORD = "<?password?>";
+	const NAME_FROM = "Hcode Store";
 
 	private $mail;
 
@@ -35,20 +35,6 @@ class Mailer {
 
 		//Tell PHPMailer to use SMTP
 		$this->mail->isSMTP();
-
-		$this->mail->SMTPOptions = array(
-
-    'ssl' => array(
-
-        'verify_peer' => false,
-
-        'verify_peer_name' => false,
-
-        'allow_self_signed' => true
-
-    )
-
-);
 
 		//Enable SMTP debugging
 		// 0 = off (for production use)

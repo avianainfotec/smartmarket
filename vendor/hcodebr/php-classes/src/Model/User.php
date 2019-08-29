@@ -5,7 +5,6 @@ namespace Hcode\Model;
 use \Hcode\DB\Sql;
 use \Hcode\Model;
 use \Hcode\Mailer;
-use \Hcode\Model\Cart;
 
 class User extends Model {
 
@@ -211,7 +210,6 @@ class User extends Model {
 			":email"=>$email
 		));
 
-
 		if (count($results) === 0)
 		{
 
@@ -222,12 +220,11 @@ class User extends Model {
 		{
 
 			$data = $results[0];
-			
-			$results2 = $sql->select("CALL sp_userspasswordsrecoveries_create(:iduser, :desip)", array(
-				":iduser"=>$data["iduser"],
-				":desip"=>$_SERVER["REMOTE_ADDR"]
-			));
 
+			$results2 = $sql->select("CALL sp_userspasswordsrecoveries_create(:iduser, :desip)", array(
+				":iduser"=>$data['iduser'],
+				":desip"=>$_SERVER['REMOTE_ADDR']
+			));
 
 			if (count($results2) === 0)
 			{
@@ -246,29 +243,22 @@ class User extends Model {
 
 				if ($inadmin === true) {
 
-					$link = "http://www.avianasmartmarket.com.br/admin/forgot/reset?code=$code";
+					$link = "http://www.hcodecommerce.com.br/admin/forgot/reset?code=$code";
 
 				} else {
 
-					$link = "http://www.avianasmartmarket.com.br/forgot/reset?code=$code";
+					$link = "http://www.hcodecommerce.com.br/forgot/reset?code=$code";
 					
 				}				
 
-				$mailer = new Mailer($data["desemail"], $data["desperson"], "Redefinir senha da Hcode Store", "forgot", array(
-					"name"=>$data["desperson"],
+				$mailer = new Mailer($data['desemail'], $data['desperson'], "Redefinir senha da Hcode Store", "forgot", array(
+					"name"=>$data['desperson'],
 					"link"=>$link
-				));	
-							
-				var_dump($mailer);
-
-				exit();
-
+				));				
 
 				$mailer->send();
 
-
 				return $link;
-
 
 			}
 
@@ -282,8 +272,6 @@ class User extends Model {
 		$code = base64_decode($code);
 
 		$idrecovery = openssl_decrypt($code, 'AES-128-CBC', pack("a16", User::SECRET), 0, pack("a16", User::SECRET_IV));
-
-		
 
 		$sql = new Sql();
 

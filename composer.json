@@ -1,9 +1,9 @@
 {
-    "name": "avianainfotec/smartmarket",
+    "name": "hcodebr/ecommerce",
     "authors": [
         {
-            "name": "Aviana Infoetc",
-            "email": "avianarocket@hotmail.com"
+            "name": "Hcode Treinamentos",
+            "email": "suporte@hcode.com.br"
         }
     ],
     "require": {

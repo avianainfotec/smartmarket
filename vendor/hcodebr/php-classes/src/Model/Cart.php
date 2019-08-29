@@ -111,6 +111,9 @@ class Cart extends Model {
 
 		$this->setData($results[0]);
 
+		//var_dump($results[0]);
+		//exit;
+
 	}
 
 	public function addProduct(Product $product)
@@ -122,6 +125,7 @@ class Cart extends Model {
 			':idcart'=>$this->getidcart(),
 			':idproduct'=>$product->getidproduct()
 		]);
+
 
 		$this->getCalculateTotal();
 
